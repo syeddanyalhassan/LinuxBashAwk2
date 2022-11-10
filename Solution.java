@@ -1,28 +1,30 @@
-import java.io.*;
-import java.util.*;
+import java.util.Scanner;
 
 public class Solution {
 
-   public static void main(String[] args) {
-        
-        Scanner sc=new Scanner(System.in);
-        String A=sc.next();
-        /* Enter your code here. Print output to STDOUT. */
-        int start=0;
-        int end=A.length()-1;
-        String ans="Yes";
-        while(start<=end){
-            if(A.charAt(start)!=A.charAt(end)){
-                ans="No";
-                break;
-            }
-            start++;
-            end--;
-        }
-        System.out.println(ans);
-        
+    static boolean isAnagram(String A, String B) {
+       A=A.toLowerCase();
+       B=B.toLowerCase();
+       boolean f = false;
+      char[] c = A.toCharArray();
+      java.util.Arrays.sort(c);
+      char[] d = B.toCharArray();
+      java.util.Arrays.sort(d);
+      String a = new String (c);
+      String b = new String (d);
+      if (a.equals(b)) {
+          f=true;
+      }
+      return f;   
+    }
+
+    public static void main(String[] args) {
+    
+        Scanner scan = new Scanner(System.in);
+        String a = scan.next();
+        String b = scan.next();
+        scan.close();
+        boolean ret = isAnagram(a, b);
+        System.out.println( (ret) ? "Anagrams" : "Not Anagrams" );
     }
 }
-
-
-

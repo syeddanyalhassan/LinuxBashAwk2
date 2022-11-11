@@ -1,39 +1,20 @@
-import java.io.*;
-import java.util.*;
+import java.util.Scanner;
+import java.util.regex.*;
 
-public class Solution {
-
- private static String removeLeadingNonLetters(String str) {
-        int i;
-        for (i = 0; i < str.length(); i++) {
-            if (Character.isLetter(str.charAt(i))) {
-                break;
-            }
-        }
-        return str.substring(i);
-    }
-
-    public static void main(String[] args) {
-          Scanner scan = new Scanner(System.in);
-        String s = scan.nextLine();
-        scan.close();
-        
-        s = removeLeadingNonLetters(s);
-        
-        /* Check special cases */
-        if (s.length() == 0) {
-            System.out.println(0);
-            return;
-        }
-        
-        /* Split on all non-alphabetic characters */
-        String[] words = s.split("[^a-zA-Z]+");
-        
-        /* Print output */
-        System.out.println(words.length);
-        for (String word : words) {
-            System.out.println(word);
-        }
+public class Solution
+{
+	public static void main(String[] args){
+		  Scanner in = new Scanner(System.in);
+      int testCases = Integer.parseInt(in.nextLine());
+      while(testCases>0){
+         testCases--;
+         String pattern = in.nextLine();
+         try{
+            Pattern.compile(pattern);
+            System.out.println("Valid");
+         }catch(PatternSyntaxException e){
+            System.out.println("Invalid");
+         }
+      }
     }
 }
-

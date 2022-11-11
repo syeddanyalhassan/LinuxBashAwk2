@@ -1,30 +1,39 @@
-import java.util.Scanner;
+import java.io.*;
+import java.util.*;
 
 public class Solution {
 
-    static boolean isAnagram(String A, String B) {
-       A=A.toLowerCase();
-       B=B.toLowerCase();
-       boolean f = false;
-      char[] c = A.toCharArray();
-      java.util.Arrays.sort(c);
-      char[] d = B.toCharArray();
-      java.util.Arrays.sort(d);
-      String a = new String (c);
-      String b = new String (d);
-      if (a.equals(b)) {
-          f=true;
-      }
-      return f;   
+ private static String removeLeadingNonLetters(String str) {
+        int i;
+        for (i = 0; i < str.length(); i++) {
+            if (Character.isLetter(str.charAt(i))) {
+                break;
+            }
+        }
+        return str.substring(i);
     }
 
     public static void main(String[] args) {
-    
-        Scanner scan = new Scanner(System.in);
-        String a = scan.next();
-        String b = scan.next();
+          Scanner scan = new Scanner(System.in);
+        String s = scan.nextLine();
         scan.close();
-        boolean ret = isAnagram(a, b);
-        System.out.println( (ret) ? "Anagrams" : "Not Anagrams" );
+        
+        s = removeLeadingNonLetters(s);
+        
+        /* Check special cases */
+        if (s.length() == 0) {
+            System.out.println(0);
+            return;
+        }
+        
+        /* Split on all non-alphabetic characters */
+        String[] words = s.split("[^a-zA-Z]+");
+        
+        /* Print output */
+        System.out.println(words.length);
+        for (String word : words) {
+            System.out.println(word);
+        }
     }
 }
+

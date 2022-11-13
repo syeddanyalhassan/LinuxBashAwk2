@@ -1,32 +1,43 @@
-import java.util.Scanner;
+import java.io.*;
+import java.util.*;
+import java.text.*;
+import java.math.*;
+import java.util.regex.*;
 
-import java.util.regex.Matcher;
-
-import java.util.regex.Pattern;
-
-
-public class DuplicateWords {
-
-    public static void main(String[] args) {
-        String regex = "\\b(\\w+)(?:\\W+\\1\\b)+";
-        Pattern p = Pattern.compile(regex,Pattern.CASE_INSENSITIVE);
-        Scanner in = new Scanner(System.in);
-        int numSentences = Integer.parseInt(in.nextLine());
-        
-        while (numSentences-- > 0) {
-            String input = in.nextLine();
-            
-            Matcher m = p.matcher(input);
-            
-            // Check for subsequences of input that match the compiled pattern
-            while (m.find()) {
-                input = input.replaceAll(m.group(), m.group(1));
-            }
-            
-            // Prints the modified sentence.
-            System.out.println(input);
+public class TagContentExtractor{
+   
+   public static void main(String[] args){
+       
+       Scanner in = new Scanner(System.in);
+       int testCases = Integer.parseInt(in.nextLine());
+       String regexPatern = "(<[^>]*>)";
+       Pattern stringPatern  = Pattern.compile(regexPatern);
+          while(testCases>0){
+              String line = in.nextLine();
+              int pos = 0;
+              Matcher m = stringPatern.matcher(line);
+              String previousHTMLTag = null;
+              int previousTagPos = -1;
+              boolean didFind = false;
+              while(m.find())
+              {    
+                  String htmlTag = line.substring(m.start(),m.end());
+                  if(htmlTag.charAt(1) != '/')
+                  {
+                    previousHTMLTag = htmlTag;
+                       previousTagPos = m.end();
+                  }else if(htmlTag.charAt(1) == '/' && previousHTMLTag != null){
+                      if(previousHTMLTag.substring(1).equals(htmlTag.substring(2))&&previousHTMLTag.length()>2 && m.start()>previousTagPos+1){
+                        System.out.println(line.substring(previousTagPos,m.start()));
+                          didFind = true;
+                      }
+                    previousHTMLTag = null;
+                  }
+                  
+              }
+              System.out.print(didFind?"":"None\n");
+              testCases--;
         }
-        
-        in.close();
+          
     }
-}    
+}

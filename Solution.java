@@ -1,27 +1,23 @@
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import java.util.Scanner;
-class UsernameValidator {
-    /*
-     * Write regular expression here.
-     */
-     
-    
-    public static final String regularExpression = "^[a-zA-Z]{1,1}[a-zA-Z0-9_]{7,29}$";
+
+class Solution{
+
+    public static void main(String[] args){
+        Scanner in = new Scanner(System.in);
+        while(in.hasNext()){
+            String IP = in.next();
+            System.out.println(IP.matches(new MyRegex().pattern));
+        }
+
+    }
 }
 
-
-public class Solution {
-    private static final Scanner scan = new Scanner(System.in);
+class MyRegex {
+    public String pattern="([1][\\d][\\d]|[0][0][0]|([0][0]|)[\\d]|([0]|)[\\d][\\d]|[2][0-4][\\d]|[2][5][0-5])."
+            + "([1][\\d][\\d]|[0][0][0]|([0][0]|)[\\d]|([0]|)[\\d][\\d]|[2][0-4][\\d]|[2][5][0-5])."
+            + "([1][\\d][\\d]|[0][0][0]|([0][0]|)[\\d]|([0]|)[\\d][\\d]|[2][0-4][\\d]|[2][5][0-5])."
+            + "([1][\\d][\\d]|[0][0][0]|([0][0]|)[\\d]|([0]|)[\\d][\\d]|[2][0-4][\\d]|[2][5][0-5])";
     
-    public static void main(String[] args) {
-        int n = Integer.parseInt(scan.nextLine());
-        while (n-- != 0) {
-            String userName = scan.nextLine();
-
-            if (userName.matches(UsernameValidator.regularExpression)) {
-                System.out.println("Valid");
-            } else {
-                System.out.println("Invalid");
-            }           
-        }
-    }
 }

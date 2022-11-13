@@ -1,43 +1,33 @@
-import java.io.*;
+import java.math.BigDecimal;
 import java.util.*;
-import java.text.*;
-import java.math.*;
-import java.util.regex.*;
+class Solution{
 
-public class TagContentExtractor{
-   
-   public static void main(String[] args){
-       
-       Scanner in = new Scanner(System.in);
-       int testCases = Integer.parseInt(in.nextLine());
-       String regexPatern = "(<[^>]*>)";
-       Pattern stringPatern  = Pattern.compile(regexPatern);
-          while(testCases>0){
-              String line = in.nextLine();
-              int pos = 0;
-              Matcher m = stringPatern.matcher(line);
-              String previousHTMLTag = null;
-              int previousTagPos = -1;
-              boolean didFind = false;
-              while(m.find())
-              {    
-                  String htmlTag = line.substring(m.start(),m.end());
-                  if(htmlTag.charAt(1) != '/')
-                  {
-                    previousHTMLTag = htmlTag;
-                       previousTagPos = m.end();
-                  }else if(htmlTag.charAt(1) == '/' && previousHTMLTag != null){
-                      if(previousHTMLTag.substring(1).equals(htmlTag.substring(2))&&previousHTMLTag.length()>2 && m.start()>previousTagPos+1){
-                        System.out.println(line.substring(previousTagPos,m.start()));
-                          didFind = true;
-                      }
-                    previousHTMLTag = null;
-                  }
-                  
-              }
-              System.out.print(didFind?"":"None\n");
-              testCases--;
+    public static void main(String []args){
+        //Input
+        Scanner sc= new Scanner(System.in);
+        int n=sc.nextInt();
+        String []s=new String[n+2];
+        for(int i=0;i<n;i++){
+            s[i]=sc.next();
         }
-          
+      	sc.close();
+
+            Arrays.sort(s, new Comparator<String>() {
+            @Override
+            public int compare(String s1, String s2) {
+                if (s1 == null || s2 == null) {
+                    return 0;
+                }
+                BigDecimal bd1 = new BigDecimal(s1);
+                BigDecimal bd2 = new BigDecimal(s2);
+                return bd2.compareTo(bd1);
+            }
+        });
+        //Output
+        for(int i=0;i<n;i++)
+        {
+            System.out.println(s[i]);
+        }
     }
+
 }

@@ -1,30 +1,41 @@
-import java.util.*;
 import java.io.*;
+import java.util.*;
+import java.text.*;
+import java.math.*;
+import java.util.regex.*;
 
-class Solution{
-    public static void main(String[]args){
-        Scanner in = new Scanner(System.in);
-        int n=in.nextInt();
-        in.nextLine();
-        HashMap<String, Integer> hash = new HashMap<String, Integer>();
-        for(int i=0;i<n;i++){
-            String name= in.nextLine();
-            int phone = in.nextInt();
-            hash.put(name,phone);
-            in.nextLine();
+public class Solution {
 
-        }
-
-        while(in.hasNext())
-        {
-            String s=in.nextLine();
-
-            try {
-                int temp = hash.get(s);
-                System.out.println(s+"=" + temp);
-            } catch (NullPointerException e) {
-                System.out.println("Not found");
+    public static boolean isBalanced(String s) {
+        Stack<Character> stack = new Stack<Character>();
+        for (int i=0; i<s.length();++i){
+            if (s.charAt(i) == '(') stack.push('(');
+            else if (s.charAt(i) == '{') stack.push('{');
+            else if (s.charAt(i) == '[') stack.push('[');
+            else if (s.charAt(i) == ')') {
+                if (stack.isEmpty()) return false;
+                if (stack.pop() != '(') return false;
             }
+            else if (s.charAt(i) == '}') {
+                if (stack.isEmpty()) return false;
+                if (stack.pop() != '{') return false;
+            }
+            else if (s.charAt(i) == ']') {
+                if (stack.isEmpty()) return false;
+                if (stack.pop() != '[') return false;
+            }
+        }
+        return stack.isEmpty();
+    }
+    
+    public static void main(String[] args) {
+        Stack<Character> stack = new Stack<Character>();
+        Scanner sc = new Scanner(System.in);
+        String line;
+        while (sc.hasNextLine()){
+            line = sc.nextLine();
+            if (isBalanced(line)) System.out.println("true");
+            else System.out.println("false");
         }
     }
 }

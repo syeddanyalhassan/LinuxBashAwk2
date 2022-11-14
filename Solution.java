@@ -7,29 +7,29 @@ import java.util.regex.*;
 public class Solution {
 
     public static void main(String[] args) {
-        /* Enter your code here. Read input from STDIN. Print output to STDOUT. Your class should be named Solution. */
-        Scanner sc = new Scanner(System.in); 
-        int range = sc.nextInt();        
-        int[] numbers = new int[range];
-        HashMap<Integer, Integer> h = new HashMap<>();
-        for (int i = 0; i < numbers.length; i++)
-        {
-            numbers[i] = sc.nextInt();
+    /* Enter your code here. Read input from STDIN. Print output to STDOUT. Your class should be named Solution. */
+        List<Integer> list = new LinkedList<>();
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        while (n-- > 0) {
+            int v = sc.nextInt();
+            list.add(v);
         }
-        int counter = 0;
-        for (int i = 0; i < numbers.length; i++){
-            for (int j = i; j < numbers.length; j++){
-                int sum = 0;
-                for (int k = i; k <= j; k = k + 1){
-                    sum = sum + numbers[k];
-                }
-                if (sum < 0){
-                    counter = counter + 1;
-                }
+        int m = sc.nextInt();
+        while (m-- > 0) {
+            String s = sc.next();
+            if (s.equals("Insert")) {
+                int a = sc.nextInt();
+                int b = sc.nextInt();
+                list.add(a, b);
+            } else {
+                int x = sc.nextInt();
+                list.remove(x);
             }
-            
         }
-    
-       System.out.println(counter);
-}
+        for (Integer i : list) {
+            System.out.print(i+" ");
+        }
+        
+    }
 }

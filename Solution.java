@@ -1,34 +1,35 @@
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
-
+import java.io.*;
+import java.util.*;
+import java.text.*;
+import java.math.*;
+import java.util.regex.*;
 
 public class Solution {
+
     public static void main(String[] args) {
-        Scanner in = new Scanner(System.in);
-
-        List<List<Integer>> lines = new ArrayList<List<Integer>>();
-        int n = in.nextInt();
-        for (int i = 0; i < n; i++) {
-            List<Integer> line = new ArrayList<Integer>();
-            int d = in.nextInt();
-            for (int j = 0; j < d; j++) {
-                line.add(in.nextInt());
-            }
-            lines.add(line);
+        /* Enter your code here. Read input from STDIN. Print output to STDOUT. Your class should be named Solution. */
+        Scanner sc = new Scanner(System.in); 
+        int range = sc.nextInt();        
+        int[] numbers = new int[range];
+        HashMap<Integer, Integer> h = new HashMap<>();
+        for (int i = 0; i < numbers.length; i++)
+        {
+            numbers[i] = sc.nextInt();
         }
-
-        int q = in.nextInt();
-        for (int i = 0; i < q; i++) {
-            int x = in.nextInt();
-            int y = in.nextInt();
-            if (y > lines.get(x - 1).size()) {
-                System.out.println("ERROR!");
-            } else {
-                System.out.println(lines.get(x - 1).get(y - 1));
+        int counter = 0;
+        for (int i = 0; i < numbers.length; i++){
+            for (int j = i; j < numbers.length; j++){
+                int sum = 0;
+                for (int k = i; k <= j; k = k + 1){
+                    sum = sum + numbers[k];
+                }
+                if (sum < 0){
+                    counter = counter + 1;
+                }
             }
+            
         }
-
-        in.close();
-    }
+    
+       System.out.println(counter);
+}
 }

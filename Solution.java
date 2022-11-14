@@ -1,35 +1,42 @@
+import java.util.*;
 
-import java.io.IOException;
-import java.lang.reflect.Method;
-
-class Printer
-{
-  <T> void printArray(T[] array) {
-        for (T element : array) {
-            System.out.println(element);
+class Checker implements Comparator<Player>{
+    @Override
+    public int compare(Player a, Player b){
+        if (a.score == b.score){
+            return a.name.compareTo(b.name);//alphabetically
+        } else {
+            return b.score - a.score;//decreasing 
         }
     }
 }
+class Player{
+    String name;
+    int score;
+    
+    Player(String name, int score){
+        this.name = name;
+        this.score = score;
+    }
+}
 
-public class Solution {
+class Solution {
 
+    public static void main(String[] args) {
+        Scanner scan = new Scanner(System.in);
+        int n = scan.nextInt();
 
-    public static void main( String args[] ) {
-        Printer myPrinter = new Printer();
-        Integer[] intArray = { 1, 2, 3 };
-        String[] stringArray = {"Hello", "World"};
-        myPrinter.printArray(intArray);
-        myPrinter.printArray(stringArray);
-        int count = 0;
-
-        for (Method method : Printer.class.getDeclaredMethods()) {
-            String name = method.getName();
-
-            if(name.equals("printArray"))
-                count++;
+        Player[] player = new Player[n];
+        Checker checker = new Checker();
+        
+        for(int i = 0; i < n; i++){
+            player[i] = new Player(scan.next(), scan.nextInt());
         }
-
-        if(count > 1)System.out.println("Method overloading is not allowed!");
-      
+        scan.close();
+     
+        Arrays.sort(player, checker);
+        for(int i = 0; i < player.length; i++){
+            System.out.printf("%s %s\n", player[i].name, player[i].score);
+        }
     }
 }

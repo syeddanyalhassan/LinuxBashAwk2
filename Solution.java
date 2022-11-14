@@ -1,23 +1,18 @@
 import java.io.*;
-import java.math.*;
-import java.security.*;
-import java.text.*;
 import java.util.*;
-import java.util.concurrent.*;
+import java.text.*;
+import java.math.*;
 import java.util.regex.*;
 
-
-
-public class JavaPrimalityTest {
+public class Solution {
 
     public static void main(String[] args) {
-        Scanner in = new Scanner(System.in);
-        BigInteger n = in.nextBigInteger();
-        in.close();
-        if (n.isProbablePrime(1)) {
-            System.out.println("prime");
-        } else {
-            System.out.println("not prime");
-        }
+         Scanner sc = new Scanner(System.in);
+        String numOne = sc.nextLine();
+        String numTwo = sc.nextLine();
+        BigInteger bigNumOne = new BigInteger(numOne);
+        BigInteger bigNumTwo = new BigInteger(numTwo);
+        System.out.println(bigNumOne.add(bigNumTwo));
+        System.out.println(bigNumOne.multiply(bigNumTwo));
     }
 }

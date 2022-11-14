@@ -1,18 +1,21 @@
-import java.io.*;
 import java.util.*;
-import java.text.*;
-import java.math.*;
-import java.util.regex.*;
 
 public class Solution {
 
     public static void main(String[] args) {
-         Scanner sc = new Scanner(System.in);
-        String numOne = sc.nextLine();
-        String numTwo = sc.nextLine();
-        BigInteger bigNumOne = new BigInteger(numOne);
-        BigInteger bigNumTwo = new BigInteger(numTwo);
-        System.out.println(bigNumOne.add(bigNumTwo));
-        System.out.println(bigNumOne.multiply(bigNumTwo));
+	   
+        Scanner scan = new Scanner(System.in);
+        int n = scan.nextInt();
+        int[] a=new int[n];
+        for (int i=0;i<n;i++)
+        {
+           a[i]=scan.nextInt(); 
+        }
+        scan.close();
+
+        // Prints each sequential element in array a
+        for (int i = 0; i < a.length; i++) {
+            System.out.println(a[i]);
+        }
     }
 }

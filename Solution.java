@@ -1,61 +1,36 @@
 import java.util.*;
 
-class Student{
-   private int id;
-   private String fname;
-   private double cgpa;
-   public Student(int id, String fname, double cgpa) {
-      super();
-      this.id = id;
-      this.fname = fname;
-      this.cgpa = cgpa;
-   }
-   public int getId() {
-      return id;
-   }
-   public String getFname() {
-      return fname;
-   }
-   public double getCgpa() {
-      return cgpa;
-   }
-}
+public class test {
+    public static void main(String[] args) {
+        Scanner in = new Scanner(System.in);
+        final Deque<Integer> deque = new ArrayDeque<Integer>();
+        final Map<Integer, Integer> map = new HashMap<Integer, Integer>();
+        final int n = in.nextInt();
+        final int m = in.nextInt();
 
-//Complete the code
-public class Solution
-{
-   public static void main(String[] args){
-      Scanner in = new Scanner(System.in);
-      int testCases = Integer.parseInt(in.nextLine());
-      
-      List<Student> studentList = new ArrayList<Student>();
-      while(testCases>0){
-         int id = in.nextInt();
-         String fname = in.next();
-         double cgpa = in.nextDouble();
-         
-         Student st = new Student(id, fname, cgpa);
-         studentList.add(st);
-         
-         testCases--;
-      }
-      
-      Collections.sort(studentList,new Comparator<Student>(){
-        public int compare(Student s1, Student s2){
-            if((s1.getCgpa()*100) != (s2.getCgpa()*100)){
-                return (int)((s2.getCgpa()*1000) - (s1.getCgpa()*1000));
+        int res = 0;
+        for (int i = 0; i < n; i++) {
+            final int num = in.nextInt();
+            deque.addLast(num);
+            if (map.containsKey(num)) {
+                map.put(num, map.get(num).intValue() + 1);
+            } else {
+                map.put(num, 1);
             }
-            else if(!(s1.getFname().equals(s2.getFname()))){
-                return s1.getFname().compareTo(s2.getFname());
+
+            if (deque.size() == m + 1) {
+                final int key = deque.removeFirst();
+                final int v = map.get(key);
+                if (v == 1) {
+                    map.remove(key);
+                } else {
+                    map.put(key, v - 1);
+                }
             }
-            else{
-                return s1.getId()-s2.getId();
-            }
+
+            final int cnt = map.size();
+            if (cnt > res) { res = cnt; }
         }
-      });    
-      
-      for(Student st: studentList){
-         System.out.println(st.getFname());
-      }
-   }
+        System.out.println(res);
+    }
 }

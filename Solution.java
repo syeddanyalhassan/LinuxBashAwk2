@@ -1,75 +1,98 @@
-import java.io.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
+/*
+ * Create the Student and Priorities classes here.
+ */
+ import java.util.Comparator;
+import java.util.PriorityQueue;
+import java.util.Scanner;
+
 import java.util.*;
-import java.text.*;
-import java.math.*;
-import java.util.regex.*;
+class Student implements Comparable<Student>{
+    String name = new String();
+    double cgpa;
+    int id;
+    public Student(String name,double cgpa,int id)
+    {
+        this.name = name;
+        this.cgpa = cgpa;
+        this.id = id;
+    }
+    public String getName(){
+        return this.name;
+    }
+    public int compareTo(Student s)
+    {
+        if(cgpa == s.cgpa)
+        {
+            if(name.compareTo(s.name) == 0)
+            {
+                if(id == s.id)
+                    return 0;
+                else if (id > s.id)
+                    return 1;
+                else
+                    return -1;
+            }
+            else
+                return name.compareTo(s.name);
+        }
+        else if(cgpa > s.cgpa)
+            return -1;
+        else
+            return 1;
+    }
+}
+
+class Priorities{
+    public ArrayList<Student> getStudents(List<String> events)
+    {
+        int n = events.size();
+        PriorityQueue<Student> pq = new PriorityQueue<Student>();
+        for(String i:events)
+        {
+            String[] s = new String[4];
+            s = i.split("\\s");
+            if(s.length>1)
+            {
+                pq.add(new Student(s[1],Double.valueOf(s[2]),Integer.valueOf(s[3])));
+            }
+            else
+            {
+                pq.poll();
+            }
+        }
+        while(pq.size()>1)
+        {
+            System.out.println(pq.poll().name);
+        }
+        return new ArrayList<Student>(pq);
+    }
+}
+
 
 public class Solution {
-
+    private final static Scanner scan = new Scanner(System.in);
+    private final static Priorities priorities = new Priorities();
+    
     public static void main(String[] args) {
-        /* Enter your code here. Read input from STDIN. Print output to STDOUT. Your class should be named Solution. */
-        Scanner scan = new Scanner(System.in);
-    int n = scan.nextInt();
-    int m = scan.nextInt();
-
-    BitSet b1 = new BitSet(n);
-    BitSet b2 = new BitSet(n);
-
-    for (int i = 0; i < m; i++) {
-      String opcode = scan.next();
-      int num1 = scan.nextInt();
-      int num2 = scan.nextInt();
-
-      switch(opcode) {
-        case "AND":
-          if (num1 == 1 && num2 == 2) {
-            b1.and(b2);
-          } else if (num1 == 2 && num2 == 1) {
-            b2.and(b1);
-          } else if (num1 == 1 && num2 == 1) {
-            b1.and(b1);
-          } else if (num1 == 2 && num2 == 2) {
-            b2.and(b2);
-          }
-          break;
-        case "OR":
-          if (num1 == 1 && num2 == 2) {
-            b1.or(b2);
-          } else if (num1 == 2 && num2 == 1) {
-            b2.or(b1);
-          } else if (num1 == 1 && num2 == 1) {
-            b1.or(b1);
-          } else if (num1 == 2 && num2 == 2) {
-            b2.or(b2);
-          }
-          break;
-        case "XOR":
-          if (num1 == 1 && num2 == 2) {
-            b1.xor(b2);
-          } else if (num1 == 2 && num2 == 1) {
-            b2.xor(b1);
-          } else if (num1 == 1 && num2 == 1) {
-            b1.xor(b1);
-          } else if (num1 == 2 && num2 == 2) {
-            b2.xor(b2);
-          }
-          break;
-        case "FLIP":
-          if (num1 == 1) {
-            b1.flip(num2);
-          } else if (num1 == 2) {
-            b2.flip(num2);
-          }
-          break;
-        case "SET":
-          if (num1 == 1) {
-            b1.set(num2);
-          } else if (num1 == 2) {
-            b2.set(num2);
-          }
-          break;
-      }
-      System.out.println(b1.cardinality() + " " + b2.cardinality());
-    }
+        int totalEvents = Integer.parseInt(scan.nextLine());    
+        List<String> events = new ArrayList<>();
+        
+        while (totalEvents-- != 0) {
+            String event = scan.nextLine();
+            events.add(event);
+        }
+        
+        List<Student> students = priorities.getStudents(events);
+        
+        if (students.isEmpty()) {
+            System.out.println("EMPTY");
+        } else {
+            for (Student st: students) {
+                System.out.println(st.getName());
+            }
+        }
     }
 }

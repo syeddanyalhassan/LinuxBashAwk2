@@ -1,42 +1,61 @@
 import java.util.*;
 
-class Checker implements Comparator<Player>{
-    @Override
-    public int compare(Player a, Player b){
-        if (a.score == b.score){
-            return a.name.compareTo(b.name);//alphabetically
-        } else {
-            return b.score - a.score;//decreasing 
-        }
-    }
+class Student{
+   private int id;
+   private String fname;
+   private double cgpa;
+   public Student(int id, String fname, double cgpa) {
+      super();
+      this.id = id;
+      this.fname = fname;
+      this.cgpa = cgpa;
+   }
+   public int getId() {
+      return id;
+   }
+   public String getFname() {
+      return fname;
+   }
+   public double getCgpa() {
+      return cgpa;
+   }
 }
-class Player{
-    String name;
-    int score;
-    
-    Player(String name, int score){
-        this.name = name;
-        this.score = score;
-    }
-}
 
-class Solution {
-
-    public static void main(String[] args) {
-        Scanner scan = new Scanner(System.in);
-        int n = scan.nextInt();
-
-        Player[] player = new Player[n];
-        Checker checker = new Checker();
-        
-        for(int i = 0; i < n; i++){
-            player[i] = new Player(scan.next(), scan.nextInt());
+//Complete the code
+public class Solution
+{
+   public static void main(String[] args){
+      Scanner in = new Scanner(System.in);
+      int testCases = Integer.parseInt(in.nextLine());
+      
+      List<Student> studentList = new ArrayList<Student>();
+      while(testCases>0){
+         int id = in.nextInt();
+         String fname = in.next();
+         double cgpa = in.nextDouble();
+         
+         Student st = new Student(id, fname, cgpa);
+         studentList.add(st);
+         
+         testCases--;
+      }
+      
+      Collections.sort(studentList,new Comparator<Student>(){
+        public int compare(Student s1, Student s2){
+            if((s1.getCgpa()*100) != (s2.getCgpa()*100)){
+                return (int)((s2.getCgpa()*1000) - (s1.getCgpa()*1000));
+            }
+            else if(!(s1.getFname().equals(s2.getFname()))){
+                return s1.getFname().compareTo(s2.getFname());
+            }
+            else{
+                return s1.getId()-s2.getId();
+            }
         }
-        scan.close();
-     
-        Arrays.sort(player, checker);
-        for(int i = 0; i < player.length; i++){
-            System.out.printf("%s %s\n", player[i].name, player[i].score);
-        }
-    }
+      });    
+      
+      for(Student st: studentList){
+         System.out.println(st.getFname());
+      }
+   }
 }

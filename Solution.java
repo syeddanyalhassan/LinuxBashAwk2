@@ -1,37 +1,26 @@
+import java.io.*;
 import java.util.*;
-public class Main{
-	
-   static Iterator func(ArrayList mylist){
-      Iterator it=mylist.iterator();
-      while(it.hasNext()){
-         Object element = it.next();
-         if(element instanceof String)
-    
+import java.text.*;
+import java.math.*;
+import java.util.regex.*;
 
-			break;
-		}
-      return it;
-      
-   }
-   @SuppressWarnings({ "unchecked" })
-   public static void main(String []args){
-      ArrayList mylist = new ArrayList();
-      Scanner sc = new Scanner(System.in);
-      int n = sc.nextInt();
-      int m = sc.nextInt();
-      for(int i = 0;i<n;i++){
-         mylist.add(sc.nextInt());
+public class Solution {
+
+    public static void main(String[] args) {
+        /* Enter your code here. Read input from STDIN. Print output to STDOUT. Your class should be named Solution. */
+        Scanner scan = new Scanner(System.in);
+    try {
+      int x = scan.nextInt();
+      int y = scan.nextInt();
+      System.out.println(x / y);
+    } catch(ArithmeticException | InputMismatchException e) {
+      if (e instanceof ArithmeticException) {
+        System.out.println("java.lang.ArithmeticException: / by zero");
+      } else if (e instanceof InputMismatchException){
+        System.out.println("java.util.InputMismatchException");
       }
-      
-      mylist.add("###");
-      for(int i=0;i<m;i++){
-         mylist.add(sc.next());
-      }
-      
-      Iterator it=func(mylist);
-      while(it.hasNext()){
-         Object element = it.next();
-         System.out.println((String)element);
-      }
-   }
+    }
+    scan.close();
+        
+    }
 }

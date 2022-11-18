@@ -1,59 +1,76 @@
 import java.io.*;
-import java.lang.reflect.*;
 import java.util.*;
+import java.text.*;
+import java.math.*;
 import java.util.regex.*;
-import java.security.*;
+import java.lang.reflect.*;
 
-
+import static java.lang.System.in;
+class Prime {
+    void checkPrime(int... numbers) {
+        for (int num : numbers) {
+            if (isPrime(num)) {
+                System.out.print(num + " ");
+            }
+        }
+        System.out.println();
+    }
+    
+    boolean isPrime(int n) {
+        if (n < 2) {
+            return false;
+        } else if (n == 2) {
+            return true;
+        } else if (n % 2 == 0) {
+            return false;
+        }
+        int sqrt = (int) Math.sqrt(n);
+        for (int i = 3; i <= sqrt; i += 2) {
+            if (n % i == 0) {
+                return false;
+            }
+        }
+        return true;
+    }     
+}
 public class Solution {
 
-	public static void main(String[] args) throws Exception {
-		DoNotTerminate.forbidExit();	
-
+	public static void main(String[] args) {
 		try{
-			BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-			int num = Integer.parseInt(br.readLine().trim());
-			Object o;// Must be used to hold the reference of the instance of the class Solution.Inner.Private
-        Inner inner = new Inner();
-            o = inner.new Private();
-            Inner.Private innerPrivate = (Inner.Private) o;
-            String response = innerPrivate.powerof2(num);
-            System.out.println(num + " is " + response);
-		System.out.println("An instance of class: " + o.getClass().getCanonicalName() + " has been created");
-		
-		}//end of try
-		
-		catch (DoNotTerminate.ExitTrappedException e) {
-			System.out.println("Unsuccessful Termination!!");
-		}
-	}//end of main
-	static class Inner{
-		private class Private{
-			private String powerof2(int num){
-				return ((num&num-1)==0)?"power of 2":"not a power of 2";
+		BufferedReader br=new BufferedReader(new InputStreamReader(in));
+		int n1=Integer.parseInt(br.readLine());
+		int n2=Integer.parseInt(br.readLine());
+		int n3=Integer.parseInt(br.readLine());
+		int n4=Integer.parseInt(br.readLine());
+		int n5=Integer.parseInt(br.readLine());
+		Prime ob=new Prime();
+		ob.checkPrime(n1);
+		ob.checkPrime(n1,n2);
+		ob.checkPrime(n1,n2,n3);
+		ob.checkPrime(n1,n2,n3,n4,n5);	
+		Method[] methods=Prime.class.getDeclaredMethods();
+		Set<String> set=new HashSet<>();
+		boolean overload=false;
+		for(int i=0;i<methods.length;i++)
+		{
+			if(set.contains(methods[i].getName()))
+			{
+				overload=true;
+				break;
 			}
+			set.add(methods[i].getName());
+			
 		}
-	}//end of Inner
+		if(overload)
+		{
+			throw new Exception("Overloading not allowed");
+		}
+		}
+		catch(Exception e)
+		{
+			System.out.println(e);
+		}
+	}
 	
-}//end of Solution
+}
 
-class DoNotTerminate { //This class prevents exit(0)
-	 
-    public static class ExitTrappedException extends SecurityException {
-
-		private static final long serialVersionUID = 1L;
-    }
- 
-    public static void forbidExit() {
-        final SecurityManager securityManager = new SecurityManager() {
-            @Override
-            public void checkPermission(Permission permission) {
-                if (permission.getName().contains("exitVM")) {
-                    throw new ExitTrappedException();
-                }
-            }
-        };
-        System.setSecurityManager(securityManager);
-    }
-}	
-	

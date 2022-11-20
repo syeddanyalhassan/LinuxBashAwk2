@@ -1,6 +1,7 @@
-x=1
-while [ $x -le 50 ]
-do
-    echo $x
-    x=$((x+1))
-done
+read X
+read Y
+
+echo "$(( $X + $Y ))"
+echo "$(( $X - $Y ))"
+echo "$(( $X * $Y ))"
+echo "$(( $X / $Y ))"

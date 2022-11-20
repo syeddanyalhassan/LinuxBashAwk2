@@ -1,0 +1,3 @@
+Iteration #2
+
+At the top of the left and right branches of the first Y, we now add a pair of Y-shapes, which are half the size of the original Y.

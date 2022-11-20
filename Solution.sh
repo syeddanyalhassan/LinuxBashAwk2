@@ -1,10 +1,7 @@
-read X
-read Y
+read input
 
-if (( $X < $Y )); then
-    echo 'X is less than Y'
-elif (( $X > $Y )); then
-    echo 'X is greater than Y'
+if [[ "$input" == 'Y' || "$input" == 'y' ]]; then
+    echo 'YES'
 else
-    echo 'X is equal to Y'
+    echo 'NO'
 fi

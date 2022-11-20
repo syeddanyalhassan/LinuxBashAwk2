@@ -1,7 +1,11 @@
-read input
+read X
+read Y
+read Z
 
-if [[ "$input" == 'Y' || "$input" == 'y' ]]; then
-    echo 'YES'
+if [[ "$X" == "$Y" && "$X" == "$Z" ]]; then
+    echo 'EQUILATERAL'
+elif [[ "$X" == "$Y" || "$X" == "$Z" || "$Y" == "$Z" ]] ; then
+    echo 'ISOSCELES'
 else
-    echo 'NO'
+    echo 'SCALENE'
 fi

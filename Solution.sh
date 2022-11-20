@@ -1,1 +1,1 @@
-head -c 20
+head -n 22 | tail -n 11

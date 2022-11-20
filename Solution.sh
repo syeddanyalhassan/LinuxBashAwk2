@@ -1,3 +1,2 @@
-for i in {1..99..2}; do
-    echo $i
-done;
+read name
+echo "Welcome $name"

@@ -1,2 +1,2 @@
-#Display the last 20 characters of an input file.
-tail -c 20
+#Output the text with all parentheses () replaced with box brackets []. 
+tr "()" "[]"

@@ -1,2 +1,2 @@
-#Replace all sequences of multiple spaces with just one space.
-tr -s ' '
+#Output the text file with the lines reordered in lexicographical order. 
+sort

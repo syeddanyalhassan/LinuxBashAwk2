@@ -1,2 +1,2 @@
-#The data has been sorted in descending order of the average monthly temperature in January (i.e, the second column). 
-sort -k2 -n -r -t '|'
+#Given a text file, remove the consecutive repetitions of any line.
+uniq

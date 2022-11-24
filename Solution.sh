@@ -1,2 +1,2 @@
-#Output the text file with the lines reordered in numerically ascending order.
-sort -n
+#The text file, with lines re-ordered in descending order (numerically).
+sort -n -r

@@ -1,6 +1,7 @@
-#Given a CSV file where each row contains the name of a city and its
-#state separated by a comma, your task is to restructure the file in
-#such a way, that three consecutive rows are folded into one, and
-#separated by tab.
+#Given a list of countries, each on a new line, your task is to read them into an array and then display the entire array, with a space between each of the countries' names.
+while read line
+do
+    arr=(${arr[@]} $line)
+done
 
-paste -d '\t' - - -
+echo ${arr[@]}

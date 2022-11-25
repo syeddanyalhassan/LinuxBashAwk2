@@ -1,3 +1,4 @@
-# You are given a list of countries, each on a new line. Your task is to read them into an array and then filter out (remove) all the names containing the letter 'a' or 'A'.
+#Given a list of countries, each on a new line, your task is to read them into an array. Then, concatenate the array with itself (twice) - so that you have a total of three repetitions of the original array - and then display the entire concatenated array, with a space between each of the countries' names
 arr=($(cat))
-echo ${arr[@]/*[aA]*/}
+arr=("${arr[@]}" "${arr[@]}" "${arr[@]}")
+echo ${arr[@]}

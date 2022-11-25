@@ -1,3 +1,4 @@
-#You are given a list of countries, each on a new line. Your task is to read them into an array and then transform them in the following way:The first capital letter (if present) in each element of the array should be replaced with a dot ('.'). Then, display the entire array with a space between each country's names.
-arr=($(cat))
-echo ${arr[@]/[A-Z]/.}
+#There are N integers in an array A. All but one integer occur in pairs. Your task is to find the number that occurs only once
+read
+arr=($(cat)) 
+echo "${arr[@]}" | tr ' ' '\n' |sort | uniq -u | tr '\n' ' '

@@ -1,1 +1,1 @@
-grep  -iwe "the" -we "that" -we "then" -we "those"
+grep '\([0-9]\) *\1'

@@ -1,1 +1,2 @@
-grep -iw "the"
+
+grep -iv "that"

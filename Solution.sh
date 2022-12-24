@@ -1,2 +1,1 @@
-
-grep -iv "that"
+sed -e 's/the /this /1'

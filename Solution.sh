@@ -1,1 +1,1 @@
-sed -e 's/the /this /1'
+sed -e 's/thy /your /gI'

@@ -1,1 +1,1 @@
-sed -E 's/([0-9]{4}) ([0-9]{4}) ([0-9]{4}) ([0-9]{4})/\4 \3 \2 \1 /g'
+awk '{if($4 =="") print("Not all scores are available for"), $1}'

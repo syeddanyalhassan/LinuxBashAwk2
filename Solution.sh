@@ -1,1 +1,1 @@
-sed -e 's/thy /your /gI'
+sed -r 's/[0-9]{4}[ ]/**** /g'
